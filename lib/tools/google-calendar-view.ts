@@ -59,11 +59,11 @@ export const googleCalendarAddEventTool = tool({
           description: description,
           start: {
             dateTime: timeStart,
-            timeZone: timeZone,
+            timeZone: timeZone ?? 'America/Los_Angeles',
           },
           end: {
             dateTime: timeEnd,
-            timeZone: timeZone,
+            timeZone: timeZone ?? 'America/Los_Angeles',
           },
         },
       });

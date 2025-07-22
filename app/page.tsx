@@ -12,6 +12,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
 
 // Define types for markdown components
 type MarkdownComponentProps = {
@@ -37,6 +38,7 @@ export default function ChatPage() {
   // Use the User type for the user object
   const { user, isLoading: isLoadingUser } = useUser() as { user: User | null; isLoading: boolean };
   const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
+  const [selectedModel, setSelectedModel] = useState('gpt-4o-mini');
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -68,6 +70,12 @@ export default function ChatPage() {
     handleInputChange({
       target: { value: prompt }
     } as React.ChangeEvent<HTMLInputElement>);
+  };
+
+  // Revert to using fetch request in submitWithModelChoice
+  const submitWithModelChoice = async (event: React.FormEvent) => {
+    event.preventDefault();
+    handleSubmit(event, {body: {modelChoice: selectedModel}});
   };
 
   // Define custom components for markdown rendering
@@ -366,7 +374,7 @@ export default function ChatPage() {
       {/* Input Area */}
       <div className="border-t border-border bg-card/95 backdrop-blur-sm px-4 py-4 weathered-border">
         <div className="max-w-4xl mx-auto">
-          <form onSubmit={handleSubmit} className="flex items-end space-x-3">
+          <form onSubmit={submitWithModelChoice} className="flex items-end space-x-3">
             <div className="flex-1 relative">
               <Input
                 value={input}
@@ -391,6 +399,16 @@ export default function ChatPage() {
                 </>
               )}
             </Button>
+            <Select onValueChange={setSelectedModel} value={selectedModel}>
+              <SelectTrigger className="mr-3 h-10 w-40">
+                <SelectValue placeholder="Select a model" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="gpt-4o-mini">GPT-4o Mini</SelectItem>
+                <SelectItem value="gpt-4.1">GPT 4.1</SelectItem>
+                <SelectItem value="gpt-3.5-turbo">GPT 3.5 Turbo</SelectItem>
+              </SelectContent>
+            </Select>
           </form>
           <p className="text-xs text-muted-foreground text-center mt-3 flex items-center justify-center gap-1">
             <Anchor className="w-3 h-3" />

@@ -5,12 +5,15 @@ import { openai } from "@ai-sdk/openai";
 import { streamText } from "ai";
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages, modelChoice } = await req.json();
+
+  // Determine the model to use
+  const model = modelChoice ? openai(modelChoice) : openai("gpt-4o-mini");
 
   // streamText is used to run the request
   const result = streamText({
     messages,
-    model: openai("gpt-4o-mini"),
+    model,
     // Provides external tools the model can call.
     // In this case, a User Info tool.
     tools: { getUserInfoTool, googleCalendarViewTool, googleCalendarAddEventTool, getCurrentDateTool },
