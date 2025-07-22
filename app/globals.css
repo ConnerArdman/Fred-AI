@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Creepster:wght@400&family=Pirata+One:wght@400&family=Rye:wght@400&display=swap');
+
+body {
+  font-family: 'Rye', serif;
+}
+
+.pirate-title {
+  font-family: 'Pirata One', cursive;
+}
+
+.pirate-creepy {
+  font-family: 'Creepster', cursive;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .pirate-glow {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6);
+  }
+  
+  .treasure-glow {
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5), inset 0 0 15px rgba(255, 215, 0, 0.1);
+  }
+  
+  .weathered-border {
+    border-image: linear-gradient(45deg, #8B4513, #A0522D, #8B4513) 1;
+  }
+  
+  .ocean-waves {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f7d 25%, #1e3a5f 50%, #2c5f7d 75%, #1e3a5f 100%);
+    background-size: 200% 200%;
+    animation: waves 6s ease-in-out infinite;
+  }
+  
+  .parchment {
+    background: linear-gradient(45deg, #f4e4bc, #e8d7b0, #f4e4bc);
+    background-size: 400% 400%;
+    animation: parchment-flutter 8s ease-in-out infinite;
+  }
+  
+  .ship-sway {
+    animation: ship-sway 3s ease-in-out infinite;
+  }
+}
+
+@keyframes waves {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes parchment-flutter {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes ship-sway {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+@layer base {
+  :root {
+    /* Pirate Color Scheme - Light Mode */
+    --background: 28 25% 95%; /* Weathered parchment */
+    --foreground: 25 35% 15%; /* Dark brown text */
+    --card: 35 40% 92%; /* Light aged paper */
+    --card-foreground: 25 35% 15%;
+    --popover: 35 40% 92%;
+    --popover-foreground: 25 35% 15%;
+    --primary: 210 100% 25%; /* Deep ocean blue */
+    --primary-foreground: 45 100% 90%; /* Light gold text */
+    --secondary: 30 45% 75%; /* Weathered wood */
+    --secondary-foreground: 25 35% 15%;
+    --muted: 35 35% 85%; /* Faded parchment */
+    --muted-foreground: 25 25% 45%;
+    --accent: 45 100% 50%; /* Treasure gold */
+    --accent-foreground: 25 35% 15%;
+    --destructive: 0 75% 45%; /* Pirate red */
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 30% 80%; /* Weathered border */
+    --input: 35 35% 88%;
+    --ring: 45 100% 50%; /* Gold focus ring */
+    --chart-1: 210 100% 35%; /* Ocean blue */
+    --chart-2: 45 100% 50%; /* Treasure gold */
+    --chart-3: 30 60% 40%; /* Weathered brown */
+    --chart-4: 0 75% 45%; /* Pirate red */
+    --chart-5: 120 40% 35%; /* Seaweed green */
+    --radius: 0.75rem;
+    --sidebar-background: 35 40% 90%;
+    --sidebar-foreground: 25 35% 20%;
+    --sidebar-primary: 210 100% 25%;
+    --sidebar-primary-foreground: 45 100% 90%;
+    --sidebar-accent: 35 35% 85%;
+    --sidebar-accent-foreground: 25 35% 15%;
+    --sidebar-border: 30 30% 75%;
+    --sidebar-ring: 45 100% 50%;
+  }
+  .dark {
+    /* Pirate Color Scheme - Dark Mode (Night at Sea) */
+    --background: 210 25% 8%; /* Dark ocean depths */
+    --foreground: 45 80% 85%; /* Moonlit gold */
+    --card: 210 20% 12%; /* Ship deck darkness */
+    --card-foreground: 45 80% 85%;
+    --popover: 210 20% 12%;
+    --popover-foreground: 45 80% 85%;
+    --primary: 45 100% 55%; /* Bright treasure gold */
+    --primary-foreground: 210 25% 8%;
+    --secondary: 210 15% 20%; /* Storm clouds */
+    --secondary-foreground: 45 80% 85%;
+    --muted: 210 15% 16%; /* Foggy night */
+    --muted-foreground: 45 50% 65%;
+    --accent: 45 100% 60%; /* Glowing treasure */
+    --accent-foreground: 210 25% 8%;
+    --destructive: 0 75% 55%; /* Blood red */
+    --destructive-foreground: 0 0% 98%;
+    --border: 210 15% 25%; /* Ship railings */
+    --input: 210 15% 18%;
+    --ring: 45 100% 60%; /* Golden glow */
+    --chart-1: 210 80% 50%; /* Moonlit ocean */
+    --chart-2: 45 100% 60%; /* Treasure gold */
+    --chart-3: 30 60% 50%; /* Rum barrel brown */
+    --chart-4: 0 75% 55%; /* Pirate flag red */
+    --chart-5: 120 50% 45%; /* Mysterious kelp */
+    --sidebar-background: 210 20% 10%;
+    --sidebar-foreground: 45 70% 80%;
+    --sidebar-primary: 45 100% 55%;
+    --sidebar-primary-foreground: 210 25% 8%;
+    --sidebar-accent: 210 15% 18%;
+    --sidebar-accent-foreground: 45 80% 85%;
+    --sidebar-border: 210 15% 22%;
+    --sidebar-ring: 45 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
