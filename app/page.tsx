@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Send, Bot, User, Loader2, LogOut, Copy, Check, Anchor, Compass, Map, Skull } from 'lucide-react';
+import { Send, User, Loader2, LogOut, Copy, Check, Anchor, Compass, Map, Skull } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useUser } from "@auth0/nextjs-auth0";
 import ReactMarkdown from 'react-markdown';
@@ -14,7 +14,6 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
 
-// Define types for markdown components
 type MarkdownComponentProps = {
   node?: any;
   inline?: boolean;
@@ -24,21 +23,15 @@ type MarkdownComponentProps = {
   [key: string]: any;
 };
 
-// Define a type for the user object
-interface User {
-  picture?: string;
-  name?: string;
-  [key: string]: any;
-}
-
 export default function ChatPage() {
-  const { messages, input, handleInputChange, handleSubmit, isLoading, setMessages } = useChat();
+  const { messages, input, handleInputChange, handleSubmit, status, setMessages } = useChat();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  // Use the User type for the user object
-  const { user, isLoading: isLoadingUser } = useUser() as { user: User | null; isLoading: boolean };
+  const { user, isLoading: isLoadingUser } = useUser();
   const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [selectedModel, setSelectedModel] = useState('gpt-4o-mini');
+
+  const isLoading = status === 'submitted' || status === 'streaming';
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -78,7 +71,6 @@ export default function ChatPage() {
     handleSubmit(event, {body: {modelChoice: selectedModel}});
   };
 
-  // Define custom components for markdown rendering
   const markdownComponents = {
     code({ node, inline, className, children, ...props }: MarkdownComponentProps) {
       const match = /language-(\w+)/.exec(className || '');

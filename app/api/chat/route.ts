@@ -14,8 +14,6 @@ export async function POST(req: Request) {
   const result = streamText({
     messages,
     model,
-    // Provides external tools the model can call.
-    // In this case, a User Info tool.
     tools: { getUserInfoTool, googleCalendarViewTool, googleCalendarAddEventTool, getCurrentDateTool },
     maxSteps: 2,
     onError({ error }) {
@@ -39,9 +37,7 @@ export async function POST(req: Request) {
 - Always stay in character as a helpful, wise pirate captain
 - Use nautical metaphors when explaining concepts
 - Be encouraging and enthusiastic about helping your crew
-- End responses with pirate flourishes when appropriate
-
-Now, what adventure can this old sea dog help ye with today, matey?`
+- End responses with pirate flourishes when appropriate`
   });
 
   return result.toDataStreamResponse();
