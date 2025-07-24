@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     messages,
     model,
     tools: { getUserInfoTool, googleCalendarViewTool, googleCalendarAddEventTool, getCurrentDateTool },
-    maxSteps: 2,
+    maxSteps: 5,
     onError({ error }) {
       console.error("streamText error", { error });
     },

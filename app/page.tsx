@@ -267,7 +267,7 @@ export default function ChatPage() {
               className={`flex items-start space-x-3 ${message.role === 'user'
                   ? 'flex-row-reverse space-x-reverse'
                   : ''
-                }`}
+                } ${message.content.length === 0 ? 'hidden' : ''}`}
             >
               <Avatar className="mr-2 mt-2 w-10 h-10 flex-shrink-0 ring-2 ring-accent/50">
                 {message.role === 'user' && user?.picture ? (
@@ -339,7 +339,7 @@ export default function ChatPage() {
             </div>
           ))}
 
-          {isLoading && messages.length > 0 && messages[messages.length - 1].role === 'user' && (
+          {isLoading && messages.length > 0 && (messages[messages.length - 1].role === 'user' || messages[messages.length - 1].content.length === 0) && (
             <div className="flex items-start space-x-3">
               <Avatar className="w-10 h-10 flex-shrink-0 ring-2 ring-accent/50">
                 <AvatarFallback className="bg-accent text-accent-foreground">

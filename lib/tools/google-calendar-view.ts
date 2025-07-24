@@ -3,7 +3,6 @@ import { z } from 'zod';
 import { google } from 'googleapis';
 import { getGoogleAuth } from '../google';
 
-// Define a Vercel AI SDK tool.
 export const googleCalendarViewTool = tool({
   description: "Check a user's schedule between the given date times on their calendar",
   parameters: z.object({
@@ -45,8 +44,6 @@ export const googleCalendarAddEventTool = tool({
     }),
   
     execute: async ({ timeStart, timeEnd, timeZone, summary, description }) => {
-      console.log("MAKING REQUEST: ",timeStart, timeEnd, timeZone, summary, description);
-
       // Get Google OAuth client with access token via Auth0.
       const auth = await getGoogleAuth();
       const calender = google.calendar({ version: 'v3', auth });
